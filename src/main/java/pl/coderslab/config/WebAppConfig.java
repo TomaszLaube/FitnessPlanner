@@ -1,4 +1,4 @@
-package pl.coderslab.controllers;
+package pl.coderslab.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
