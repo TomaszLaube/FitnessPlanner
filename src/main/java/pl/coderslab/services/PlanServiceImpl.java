@@ -8,6 +8,8 @@ import pl.coderslab.repositories.PlanRepository;
 import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
+
 @Service
 @Transactional
 public class PlanServiceImpl implements PlanService<Plan> {
@@ -50,5 +52,10 @@ public class PlanServiceImpl implements PlanService<Plan> {
     @Override
     public Plan findLatestByUser(Long userId) {
         return planRepository.findFirstByUserIdOrderByCreatedDesc(userId);
+    }
+
+    @Override
+    public List<Plan> findAllByUser(Long userId) {
+        return planRepository.findPlansByUserIdOrderByCreatedDesc(userId);
     }
 }

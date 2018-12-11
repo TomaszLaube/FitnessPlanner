@@ -11,7 +11,7 @@
                 <div class="row border-bottom border-3">
                     <div class="col"><h3 class="color-header text-uppercase">Add Exercise</h3></div>
                     <div class="col d-flex justify-content-end mb-2">
-                        <button type="submit" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Save
+                        <button type="submit" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Update
                         </button>
                     </div>
                 </div>
@@ -58,6 +58,9 @@
                         <form:errors path="gear" element="div" cssClass="error"/>
                     </div>
                 </div>
+                <form:hidden path="id" value="${exercise.id}"/>
+                <form:hidden path="created" value="${exercise.created}"/>
+                <form:hidden path="user.id" value="${exercise.user.id}"/>
             </form:form>
         </div>
     </div>

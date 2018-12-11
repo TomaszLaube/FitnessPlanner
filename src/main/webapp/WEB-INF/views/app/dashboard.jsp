@@ -16,15 +16,17 @@
             <div class="menu-item border-dashed">
                 <a href="/app/plan/add">
                     <i class="far fa-plus-square icon-plus-square"></i>
-                    <span class="title">dodaj plan</span>
+                    <span class="title">Add plan</span>
                 </a>
             </div>
-            <div class="menu-item border-dashed">
-                <a href="/app/recipe/plan/add">
-                    <i class="far fa-plus-square icon-plus-square"></i>
-                    <span class="title">dodaj przepis do planu</span>
-                </a>
-            </div>
+            <c:if test="${(countPlans > 0) && (countExercises > 0)}">
+                <div class="menu-item border-dashed">
+                    <a href="/app/exercise/plan/add">
+                        <i class="far fa-plus-square icon-plus-square"></i>
+                        <span class="title">Add exercise to plan</span>
+                    </a>
+                </div>
+            </c:if>
         </div>
 
         <div class="dashboard-alerts">
@@ -43,109 +45,35 @@
             <h2 class="dashboard-content-title">
                 <span>Your latest plan: </span>${latestPlan.name}
             </h2>
-            <table class="table">
-                <thead>
-                <tr class="d-flex">
-                    <th class="col-2">Poniedziałek</th>
-                    <th class="col-8"></th>
-                    <th class="col-2"></th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="planrecipe" items="${monday}">
-                    <tr class="d-flex">
-                        <td class="col-2">${planrecipe.mealName}</td>
-                        <td class="col-8">${planrecipe.recipe.name}</td>
-                        <td class="col-2"><a href="/app/recipe/details/${planrecipe.recipe.id}">
-                            <button type="button" class="btn btn-primary rounded-0">Szczegóły</button>
-                        </a></td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-            <table class="table">
-                <thead>
-                <tr class="d-flex">
-                    <th class="col-2">Wtorek</th>
-                    <th class="col-8"></th>
-                    <th class="col-2"></th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="planrecipe" items="${tuesday}">
-                    <tr class="d-flex">
-                        <td class="col-2">${planrecipe.mealName}</td>
-                        <td class="col-8">${planrecipe.recipe.name}</td>
-                        <td class="col-2"><a href="/app/recipe/details/${planrecipe.recipe.id}">
-                            <button type="button" class="btn btn-primary rounded-0">Szczegóły</button>
-                        </a></td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
+            <c:forEach var="day" items="${fullWeek}">
+                <c:if test="${not empty day}">
+                    <table class="table">
+                        <thead>
+                        <tr class="d-flex">
+                            <th class="col-2">${day[0].day.name}</th>
+                            <th class="col-3"></th>
+                            <th class="col-7"></th>
 
-            <table class="table">
-                <thead>
-                <tr class="d-flex">
-                    <th class="col-2">Środa</th>
-                    <th class="col-8"></th>
-                    <th class="col-2"></th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="planrecipe" items="${wednesday}">
-                    <tr class="d-flex">
-                        <td class="col-2">${planrecipe.mealName}</td>
-                        <td class="col-8">${planrecipe.recipe.name}</td>
-                        <td class="col-2"><a href="/app/recipe/details/${planrecipe.recipe.id}">
-                            <button type="button" class="btn btn-primary rounded-0">Szczegóły</button>
-                        </a></td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
+                        </tr>
+                        </thead>
+                        <tbody class="text-color-lighter">
+                        <tr class="d-flex">
+                            <th class="col-2">Exercise Type</th>
+                            <th class="col-3">Name</th>
+                            <th class="col-7">Description</th>
 
-            <table class="table">
-                <thead>
-                <tr class="d-flex">
-                    <th class="col-2">Czwartek</th>
-                    <th class="col-8"></th>
-                    <th class="col-2"></th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="planrecipe" items="${thursday}">
-                    <tr class="d-flex">
-                        <td class="col-2">${planrecipe.mealName}</td>
-                        <td class="col-8">${planrecipe.recipe.name}</td>
-                        <td class="col-2"><a href="/app/recipe/details/${planrecipe.recipe.id}">
-                            <button type="button" class="btn btn-primary rounded-0">Szczegóły</button>
-                        </a></td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-
-            <table class="table">
-                <thead>
-                <tr class="d-flex">
-                    <th class="col-2">Piątek</th>
-                    <th class="col-8"></th>
-                    <th class="col-2"></th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="planrecipe" items="${friday}">
-                    <tr class="d-flex">
-                        <td class="col-2">${planrecipe.mealName}</td>
-                        <td class="col-8">${planrecipe.recipe.name}</td>
-                        <td class="col-2"><a href="/app/recipe/details/${planrecipe.recipe.id}">
-                            <button type="button" class="btn btn-primary rounded-0">Szczegóły</button>
-                        </a></td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
+                        </tr>
+                        <c:forEach var="planExercise" items="${day}">
+                            <tr class="d-flex">
+                                <td class="col-2">${planExercise.exerciseName}</td>
+                                <td class="col-3">${planExercise.exercise.name}</td>
+                                <td class="col-7 d-flex flex-wrap">${planExercise.exercise.description}</td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </c:if>
+            </c:forEach>
         </div>
     </c:if>
     <c:if test="${empty latestPlan}">

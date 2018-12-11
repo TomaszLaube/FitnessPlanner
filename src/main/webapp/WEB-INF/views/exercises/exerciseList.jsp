@@ -6,7 +6,7 @@
 <div class="m-4 p-3 width-medium">
     <div class="dashboard-content border-dashed p-3 m-4 view-height">
         <div class="row border-bottom border-3 p-1 m-1">
-            <div class="col noPadding"><h3 class="color-header text-uppercase">Lista Przepisów</h3></div>
+            <div class="col noPadding"><h3 class="color-header text-uppercase">Exercise List</h3></div>
             <div class="col noPadding d-flex justify-content-end mb-2"><a href="/app/exercise/add"
                                                                           class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Add
                 Exercise</a></div>
@@ -22,9 +22,9 @@
                 </tr>
                 </thead>
                 <tbody class="text-color-lighter">
-                <c:forEach var="exercise" items="${userExercises}">
+                <c:forEach var="exercise" items="${userExercises}" varStatus="loop">
                     <tr class="d-flex">
-                        <td class="col-1">${exercise.id}</td>
+                        <td class="col-1">${loop.index+1}</td>
                         <td class="col-2">${exercise.name}</td>
                         <td class="col-7">${exercise.description}</td>
                         <td class="col-2 d-flex align-items-center justify-content-center flex-wrap">

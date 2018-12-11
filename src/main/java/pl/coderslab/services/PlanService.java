@@ -1,5 +1,7 @@
 package pl.coderslab.services;
 
+import java.util.List;
+
 public interface PlanService<P> {
     void save(P p);
     void update(P p);
@@ -8,4 +10,5 @@ public interface PlanService<P> {
     long countByUser(Long userId);
     P findLatest();
     P findLatestByUser(Long userId);
+    List<P> findAllByUser(Long userId);
 }

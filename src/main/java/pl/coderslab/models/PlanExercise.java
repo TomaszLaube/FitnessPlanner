@@ -3,6 +3,7 @@ package pl.coderslab.models;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -19,6 +20,7 @@ public class PlanExercise {
 
     @NotNull
     @Min(1)
+    @Max(value = 10)
     private Long exerciseOrder;
 
     @ManyToOne

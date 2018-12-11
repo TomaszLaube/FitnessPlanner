@@ -33,7 +33,7 @@
             <form class="nav-item ml-4" action="/logout" method="post" id="logoutForm">
                 <input type="hidden" name="${_csrf.parameterName}"
                        value="${_csrf.token}"/>
-                <input type="submit" value="Logout">
+                <input type="submit" value="Logout" class="btn btn-warning rounded-0 text-light m-1">
             </form>
         </div>
     </nav>
@@ -44,37 +44,37 @@
         <ul class="nav flex-column long-bg">
             <li class="nav-item">
                 <a class="nav-link" href="/app/dashboard">
-                    <span>Pulpit</span>
+                    <span>Dashboard</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/app/recipe/list">
-                    <span>Przepisy</span>
+                <a class="nav-link" href="/app/exercise/list">
+                    <span>Exercises</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/app/plan/list">
-                    <span>Plany</span>
+                    <span>Plans</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/app/admin/edit">
-                    <span>Edytuj dane</span>
+                    <span>Edit data</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link disabled" href="#">
-                    <span>Zmień hasło</span>
+                    <span>Change password</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <span>Użytkownicy</span>
+                    <span>Users</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
             </li>

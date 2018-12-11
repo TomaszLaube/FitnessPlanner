@@ -30,7 +30,7 @@ public class Plan {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "plan", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "plan", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<PlanExercise> planExercises = new ArrayList<>();
 
     public Long getId() {
