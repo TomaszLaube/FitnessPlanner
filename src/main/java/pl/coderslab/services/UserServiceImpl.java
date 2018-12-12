@@ -67,4 +67,14 @@ public class UserServiceImpl implements UserService<User> {
     public User findByEmail(String email) {
         return userRepository.findUserByEmailIgnoreCase(email);
     }
+
+    @Override
+    public User findByUsernameStatus(String username, boolean enabled) {
+        return userRepository.findUserByUsernameIgnoreCaseAndEnabled(username, enabled);
+    }
+
+    @Override
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
+    }
 }

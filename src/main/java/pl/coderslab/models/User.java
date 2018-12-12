@@ -6,7 +6,6 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +21,6 @@ public class User {
     private String username;
 
     @NotBlank
-    //@Size(min = 8, message = "Password must be at least 8 characters long")
     private String password;
 
     @Transient

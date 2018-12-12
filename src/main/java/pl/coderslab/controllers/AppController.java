@@ -41,52 +41,52 @@ public class AppController {
 
 
     @RequestMapping("/dashboard")
-    public String dashboard(@AuthenticationPrincipal CurrentUser customUser, Model model){
+    public String dashboard(@AuthenticationPrincipal CurrentUser customUser, Model model) {
 
         User currentUser = customUser.getUser();
 
         long userPlans = planService.countByUser(currentUser.getId());
         long userExercises = exerciseService.countByUserId(currentUser.getId());
 
-        Plan latestPlan = (Plan)planService.findLatestByUser(currentUser.getId());
-
-        List<PlanExercise> monday = planExerciseService.findAllByPlanAndDay(latestPlan.getId(), 1L);
-        List<PlanExercise> tuesday = planExerciseService.findAllByPlanAndDay(latestPlan.getId(), 2L);
-        List<PlanExercise> wednesday = planExerciseService.findAllByPlanAndDay(latestPlan.getId(), 3L);
-        List<PlanExercise> thursday = planExerciseService.findAllByPlanAndDay(latestPlan.getId(), 4L);
-        List<PlanExercise> friday = planExerciseService.findAllByPlanAndDay(latestPlan.getId(), 5L);
-        List<PlanExercise> saturday = planExerciseService.findAllByPlanAndDay(latestPlan.getId(), 6L);
-        List<PlanExercise> sunday = planExerciseService.findAllByPlanAndDay(latestPlan.getId(), 7L);
-        if(monday.size()>0){
-            Collections.sort(monday,new PlanExerciseDayOrderComparator());
-        }
-        if(tuesday.size()>0){
-            Collections.sort(tuesday,new PlanExerciseDayOrderComparator());
-        }
-        if(wednesday.size()>0){
-            Collections.sort(wednesday,new PlanExerciseDayOrderComparator());
-        }
-        if(thursday.size()>0){
-            Collections.sort(thursday,new PlanExerciseDayOrderComparator());
-        }
-        if(friday.size()>0){
-            Collections.sort(friday,new PlanExerciseDayOrderComparator());
-        }
-        if(saturday.size()>0){
-            Collections.sort(saturday,new PlanExerciseDayOrderComparator());
-        }
-        if(sunday.size()>0){
-            Collections.sort(sunday,new PlanExerciseDayOrderComparator());
-        }
+        Plan latestPlan = (Plan) planService.findLatestByUser(currentUser.getId());
         List<List<PlanExercise>> fullWeek = new ArrayList<>();
-        fullWeek.add(monday);
-        fullWeek.add(tuesday);
-        fullWeek.add(wednesday);
-        fullWeek.add(thursday);
-        fullWeek.add(friday);
-        fullWeek.add(saturday);
-        fullWeek.add(sunday);
-
+        if (latestPlan != null) {
+            List<PlanExercise> monday = planExerciseService.findAllByPlanAndDay(latestPlan.getId(), 1L);
+            List<PlanExercise> tuesday = planExerciseService.findAllByPlanAndDay(latestPlan.getId(), 2L);
+            List<PlanExercise> wednesday = planExerciseService.findAllByPlanAndDay(latestPlan.getId(), 3L);
+            List<PlanExercise> thursday = planExerciseService.findAllByPlanAndDay(latestPlan.getId(), 4L);
+            List<PlanExercise> friday = planExerciseService.findAllByPlanAndDay(latestPlan.getId(), 5L);
+            List<PlanExercise> saturday = planExerciseService.findAllByPlanAndDay(latestPlan.getId(), 6L);
+            List<PlanExercise> sunday = planExerciseService.findAllByPlanAndDay(latestPlan.getId(), 7L);
+            if (monday.size() > 0) {
+                Collections.sort(monday, new PlanExerciseDayOrderComparator());
+            }
+            if (tuesday.size() > 0) {
+                Collections.sort(tuesday, new PlanExerciseDayOrderComparator());
+            }
+            if (wednesday.size() > 0) {
+                Collections.sort(wednesday, new PlanExerciseDayOrderComparator());
+            }
+            if (thursday.size() > 0) {
+                Collections.sort(thursday, new PlanExerciseDayOrderComparator());
+            }
+            if (friday.size() > 0) {
+                Collections.sort(friday, new PlanExerciseDayOrderComparator());
+            }
+            if (saturday.size() > 0) {
+                Collections.sort(saturday, new PlanExerciseDayOrderComparator());
+            }
+            if (sunday.size() > 0) {
+                Collections.sort(sunday, new PlanExerciseDayOrderComparator());
+            }
+            fullWeek.add(monday);
+            fullWeek.add(tuesday);
+            fullWeek.add(wednesday);
+            fullWeek.add(thursday);
+            fullWeek.add(friday);
+            fullWeek.add(saturday);
+            fullWeek.add(sunday);
+        }
         model.addAttribute("user", currentUser);
         model.addAttribute("countPlans", userPlans);
         model.addAttribute("countExercises", userExercises);
@@ -95,60 +95,67 @@ public class AppController {
 
         return "app/dashboard";
     }
+
     @GetMapping("/editUserData")
-    public String editUser(@AuthenticationPrincipal CurrentUser customUser, Model model){
+    public String editUser(@AuthenticationPrincipal CurrentUser customUser, Model model) {
         User user = customUser.getUser();
-        model.addAttribute("user", user);
+        User updatedUser = (User) userService.findById(user.getId());
+        model.addAttribute("user", updatedUser);
         return "app/editUser";
     }
+
     @PostMapping("/editUserData")
-    public String editedUsed(@ModelAttribute @Valid User user, BindingResult result, Model model){
-        if(result.hasErrors()){
+    public String editedUsed(@ModelAttribute @Valid User user, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             return "app/editUser";
         }
-        User byUsername = (User)userService.findByUsername(user.getUsername());
-        User byEmail = (User)userService.findByEmail(user.getEmail());
-        if(byUsername.getId()==user.getId()){
+        User byUsername = (User) userService.findByUsername(user.getUsername());
+        User byEmail = (User) userService.findByEmail(user.getEmail());
+        if (byUsername != null && byUsername.getId() == user.getId()) {
             byUsername = null;
         }
-        if(byEmail.getId()==user.getId()){
+        if (byEmail != null && byEmail.getId() == user.getId()) {
             byEmail = null;
         }
-        if(byUsername != null || byEmail != null){
-            if(byUsername != null){
+        if (byUsername != null || byEmail != null) {
+            if (byUsername != null) {
                 model.addAttribute("usernameExists", true);
             }
-            if(byEmail != null){
+            if (byEmail != null) {
                 model.addAttribute("emailExists", true);
             }
-            model.addAttribute("user",user);
+            model.addAttribute("user", user);
             return "app/editUser";
-        }
-        else{
+        } else {
+            User temp = (User) userService.findById(user.getId());
+            user.setRoles(temp.getRoles());
             userService.updateUser(user);
             return "redirect:/app/dashboard";
         }
     }
+
     @GetMapping("/changePassword")
-    public String changePassword(@AuthenticationPrincipal CurrentUser customUser, Model model){
+    public String changePassword(@AuthenticationPrincipal CurrentUser customUser, Model model) {
         User user = customUser.getUser();
         model.addAttribute("user", user);
         return "app/changePassword";
     }
+
     @PostMapping("/changePassword")
     public String changedPassword(@AuthenticationPrincipal CurrentUser customUser, Model model, @RequestParam String oldPassword, @RequestParam String newPassword, @RequestParam String newPasswordCheck) {
         User user = customUser.getUser();
-        if(!passwordEncoder.matches(oldPassword,user.getPassword())){
-           model.addAttribute("incorrectOldPassword",true);
-           return"app/changePassword";
-        }
-        else if(!newPassword.equals(newPasswordCheck)){
-            model.addAttribute("incorrectNewPassword",true);
-            return"app/changePassword";
-        }else{
-         user.setPassword(newPassword);
-         userService.changePassword(user);
-         return "redirect:/app/dashboard";
+        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+            model.addAttribute("incorrectOldPassword", true);
+            return "app/changePassword";
+        } else if (!newPassword.equals(newPasswordCheck)) {
+            model.addAttribute("incorrectNewPassword", true);
+            return "app/changePassword";
+        } else {
+            User temp = (User) userService.findById(user.getId());
+            user.setRoles(temp.getRoles());
+            user.setPassword(newPassword);
+            userService.changePassword(user);
+            return "redirect:/app/dashboard";
         }
     }
 
