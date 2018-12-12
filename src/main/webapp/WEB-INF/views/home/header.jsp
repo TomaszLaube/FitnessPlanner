@@ -50,22 +50,23 @@
         </a>
         <ul class="nav nounderline text-uppercase">
             <li class="nav-item ml-4">
-                <a class="nav-link color-header" href="/login">logowanie</a>
+                <a class="nav-link color-header" href="/login">login</a>
             </li>
             <li class="nav-item ml-4">
-                <a class="nav-link color-header" href="/register">rejestracja</a>
+                <a class="nav-link color-header" href="/register">register</a>
+            </li>
+
+            <li class="nav-item ml-4">
+                <a class="nav-link" href="/app/plan/list">Your plans</a>
             </li>
             <li class="nav-item ml-4">
-                <a class="nav-link" href="/about">o aplikacji</a>
+                <a class="nav-link disabled" href="/app/exercise/list">Your exercises</a>
             </li>
             <li class="nav-item ml-4">
-                <a class="nav-link" href="/">Zaplanuj posiłki</a>
+                <a class="nav-link disabled" href="/contact">Contact</a>
             </li>
             <li class="nav-item ml-4">
-                <a class="nav-link disabled" href="/recipes">Przepisy</a>
-            </li>
-            <li class="nav-item ml-4">
-                <a class="nav-link disabled" href="/contact">Kontakt</a>
+                <a class="nav-link" href="/about">about</a>
             </li>
         </ul>
     </nav>

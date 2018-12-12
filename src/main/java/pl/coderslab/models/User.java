@@ -26,7 +26,6 @@ public class User {
     private String password;
 
     @Transient
-    @NotBlank
     private String checkPassword;
 
     @NotBlank
@@ -36,7 +35,7 @@ public class User {
 
     private boolean enabled = true;
 
-    @ManyToMany()
+    @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Role> roles = new ArrayList<>();
 

@@ -48,4 +48,9 @@ public class ExerciseServiceImpl implements ExerciseService<Exercise> {
     public List<Exercise> findAllByUser(Long userId) {
         return exerciseRepository.findAllByUserIdOrderByCreatedDesc(userId);
     }
+
+    @Override
+    public List<Exercise> findAll() {
+        return exerciseRepository.findAllByOrderByCreatedDesc();
+    }
 }

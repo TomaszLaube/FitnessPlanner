@@ -30,23 +30,25 @@ public class PlanController {
     PlanExerciseService planExerciseService;
 
     @RequestMapping("/list")
-    public String planList(@AuthenticationPrincipal CurrentUser customUser, Model model){
+    public String planList(@AuthenticationPrincipal CurrentUser customUser, Model model) {
         User currentUser = customUser.getUser();
         model.addAttribute("user", currentUser);
         List<Plan> userPlans = planService.findAllByUser(currentUser.getId());
         model.addAttribute("userPlans", userPlans);
         return "plans/planList";
     }
+
     @GetMapping("/add")
-    public String addPlanForm(@AuthenticationPrincipal CurrentUser customUser, Model model){
+    public String addPlanForm(@AuthenticationPrincipal CurrentUser customUser, Model model) {
         User currentUser = customUser.getUser();
         model.addAttribute("user", currentUser);
         model.addAttribute("plan", new Plan());
         return "plans/addForm";
     }
+
     @PostMapping("/add")
-    public String addedPlan(@ModelAttribute @Valid Plan plan, BindingResult result, @AuthenticationPrincipal CurrentUser customUser){
-        if(result.hasErrors()){
+    public String addedPlan(@ModelAttribute @Valid Plan plan, BindingResult result, @AuthenticationPrincipal CurrentUser customUser) {
+        if (result.hasErrors()) {
             return "plans/addForm";
         }
         User currentUser = customUser.getUser();
@@ -54,8 +56,9 @@ public class PlanController {
         planService.save(plan);
         return "redirect:/app/plan/list";
     }
+
     @GetMapping("/details/{planId}")
-    public String planDetails(@PathVariable Long planId, @AuthenticationPrincipal CurrentUser customUser, Model model){
+    public String planDetails(@PathVariable Long planId, @AuthenticationPrincipal CurrentUser customUser, Model model) {
         User currentUser = customUser.getUser();
         Plan plan = (Plan) planService.findById(planId);
         List<PlanExercise> monday = planExerciseService.findAllByPlanAndDay(planId, 1L);
@@ -65,26 +68,26 @@ public class PlanController {
         List<PlanExercise> friday = planExerciseService.findAllByPlanAndDay(planId, 5L);
         List<PlanExercise> saturday = planExerciseService.findAllByPlanAndDay(planId, 6L);
         List<PlanExercise> sunday = planExerciseService.findAllByPlanAndDay(planId, 7L);
-        if(monday.size()>0){
-            Collections.sort(monday,new PlanExerciseDayOrderComparator());
+        if (monday.size() > 0) {
+            Collections.sort(monday, new PlanExerciseDayOrderComparator());
         }
-        if(tuesday.size()>0){
-            Collections.sort(tuesday,new PlanExerciseDayOrderComparator());
+        if (tuesday.size() > 0) {
+            Collections.sort(tuesday, new PlanExerciseDayOrderComparator());
         }
-        if(wednesday.size()>0){
-            Collections.sort(wednesday,new PlanExerciseDayOrderComparator());
+        if (wednesday.size() > 0) {
+            Collections.sort(wednesday, new PlanExerciseDayOrderComparator());
         }
-        if(thursday.size()>0){
-            Collections.sort(thursday,new PlanExerciseDayOrderComparator());
+        if (thursday.size() > 0) {
+            Collections.sort(thursday, new PlanExerciseDayOrderComparator());
         }
-        if(friday.size()>0){
-            Collections.sort(friday,new PlanExerciseDayOrderComparator());
+        if (friday.size() > 0) {
+            Collections.sort(friday, new PlanExerciseDayOrderComparator());
         }
-        if(saturday.size()>0){
-            Collections.sort(saturday,new PlanExerciseDayOrderComparator());
+        if (saturday.size() > 0) {
+            Collections.sort(saturday, new PlanExerciseDayOrderComparator());
         }
-        if(sunday.size()>0){
-            Collections.sort(sunday,new PlanExerciseDayOrderComparator());
+        if (sunday.size() > 0) {
+            Collections.sort(sunday, new PlanExerciseDayOrderComparator());
         }
         List<List<PlanExercise>> fullWeek = new ArrayList<>();
         fullWeek.add(monday);
@@ -99,15 +102,35 @@ public class PlanController {
         model.addAttribute("plan", plan);
         return "plans/details";
     }
+
     @GetMapping("/delete/{planId}")
-    public String deletePlan(@PathVariable Long planId, @AuthenticationPrincipal CurrentUser customUser, Model model){
+    public String deletePlan(@PathVariable Long planId, @AuthenticationPrincipal CurrentUser customUser, Model model) {
         User currentUser = customUser.getUser();
         model.addAttribute("user", currentUser);
         return "plans/confirmDelete";
     }
+
     @PostMapping("/delete/{planId}")
-    public String deletedPlan(@PathVariable Long planId){
+    public String deletedPlan(@PathVariable Long planId) {
         planService.delete(planService.findById(planId));
+        return "redirect:/app/plan/list";
+    }
+
+    @GetMapping("/edit/{planId}")
+    public String editPlan(@AuthenticationPrincipal CurrentUser customUser, Model model, @PathVariable Long planId) {
+        Plan plan = (Plan) planService.findById(planId);
+        User currentUser = customUser.getUser();
+        model.addAttribute("user", currentUser);
+        model.addAttribute("plan", plan);
+        return "plans/editPlan";
+    }
+
+    @PostMapping("edit/{planId}")
+    public String editedPlan(@ModelAttribute @Valid Plan plan, BindingResult result, @PathVariable Long planId) {
+        if (result.hasErrors()) {
+            return "redirect:/app/plan/edit/" + planId;
+        }
+        planService.update(plan);
         return "redirect:/app/plan/list";
     }
 }

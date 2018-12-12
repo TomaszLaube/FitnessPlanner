@@ -9,4 +9,5 @@ public interface ExerciseService<E> {
     E findById(Long exerciseId);
     long countByUserId(Long userId);
     List<E> findAllByUser(Long userId);
+    List<E> findAll();
 }

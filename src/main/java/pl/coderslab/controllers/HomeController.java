@@ -5,16 +5,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.models.Exercise;
 import pl.coderslab.models.User;
+import pl.coderslab.services.ExerciseService;
 import pl.coderslab.services.UserService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class HomeController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    ExerciseService exerciseService;
 
 
     @RequestMapping("/")
@@ -59,6 +64,18 @@ public class HomeController {
             userService.saveUser(user);
             return "home/homepage";
         }
+    }
+    @RequestMapping("/userExercises")
+    public String userExercises(Model model){
+        List<Exercise> exercises = exerciseService.findAll();
+        model.addAttribute("exercises", exercises);
+        return "home/userExercises";
+    }
+    @RequestMapping("/exerciseDetails/{exerciseId}")
+    public String exerciseDetails(Model model, @PathVariable Long exerciseId){
+        Exercise exercise = (Exercise) exerciseService.findById(exerciseId);
+        model.addAttribute("exercise", exercise);
+        return "home/exerciseDetails";
     }
 
 

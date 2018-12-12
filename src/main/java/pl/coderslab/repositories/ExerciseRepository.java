@@ -9,4 +9,5 @@ public interface ExerciseRepository extends JpaRepository<Exercise,Long> {
     Exercise findExerciseById(Long exerciseId);
     long countByUserId(Long userId);
     List<Exercise> findAllByUserIdOrderByCreatedDesc(Long userId);
+    List<Exercise> findAllByOrderByCreatedDesc();
 }

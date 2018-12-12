@@ -61,13 +61,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/app/admin/edit">
+                <a class="nav-link" href="/app/editUserData">
                     <span>Edit data</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="#">
+                <a class="nav-link disabled" href="/app/changePassword">
                     <span>Change password</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
