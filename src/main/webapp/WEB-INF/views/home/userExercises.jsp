@@ -30,7 +30,7 @@
                 <th scope="row" class="col-1">${loop.index+1}</th>
                 <td class="col-5">${exercise.name}</td>
                 <td class="col-5">${exercise.description}</td>
-                <td class="col-1"><a href="/exerciseDetails/${exercise.id}" class="btn btn-info rounded-0 text-light">Szczegóły</a></td>
+                <td class="col-1"><a href="/exerciseDetails/${exercise.id}" class="btn btn-info rounded-0 text-light">Details</a></td>
             </tr>
         </c:forEach>
         </tbody>
