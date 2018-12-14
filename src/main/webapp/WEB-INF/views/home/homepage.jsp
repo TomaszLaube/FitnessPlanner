@@ -42,13 +42,12 @@
 <section class="section-more padding-small">
     <div class="container d-flex justify-content-between">
         <div class="mr-4">
-            <h1 class="pb-3">Lorem ipsum dolor sit amet</h1>
-            <h4 class="pt-1">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                magna aliqua.</h4>
+            <h1 class="pb-3">Register and make your own fitness plans!</h1>
+            <h4 class="pt-1">It's very easy and takes less than a minute!</h4>
         </div>
         <div class="ml-4 align-self-center">
             <button class="btn btn-color rounded-0 mt-4 pl-4 pr-4">
-                <a href="index.html">Lorem ipsum</a>
+                <a href="/register">Create account</a>
             </button>
         </div>
     </div>
@@ -59,69 +58,26 @@
         <div class="row">
             <div class="col text-center">
                 <i class="fas fa-check icon-details"></i>
-                <h1>Lorem ipsum dolor sit amet</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.  Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.
-                </p>
+                <h1>Get inspired by others</h1>
+                <p>Check out our user-created exercises for some inspiration and keeping things efficient.</p>
             </div>
             <div class="col text-center pr-4 pl-4 mr-4 ml-4">
                 <i class="far fa-clock icon-details"></i>
-                <h1>Lorem ipsum dolor sit amet</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.  Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.
+                <h1>Fitness Planner saves time</h1>
+                <p>
+                    Creating your own plans and exercises is super easy and quick.
                 </p>
             </div>
             <div class="col text-center">
                 <i class="fas fa-list icon-details"></i>
-                <h1>Lorem ipsum dolor sit amet</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.  Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.
+                <h1>Manage your own plans</h1>
+                <p>
+                    Our app makes managing your fit plans super easy. Try it out!
                 </p>
             </div>
         </div>
     </div>
 </section>
-
-
-<section class="newsletter-section padding-small">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1>Lorem ipsum dolor sie amet</h1>
-            </div>
-            <div class="col-5">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control border-0 rounded-0" placeholder=""
-                           aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        <button class="input-group-text btn-color border-0 rounded-0" type="submit" id="basic-addon2">
-                            <a href="index.html">Lorem</a>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="padding-medium story bg-light" id="about">
-    <div class="container d-flex justify-content-center align-items-center">
-        <div class="row">
-            <div class="col-4 mr-4">
-                <div class="div-img">
-                </div>
-            </div>
-
-            <div class="col-7 ml-4">
-                <h1 class="pb-1">Lorem ipsum dolor sit amet</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat
-                    volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed. Lorem ipsum dolor sit
-                    amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec
-                    placerat nisl magna, et faucibus arcu condimentum sed.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
